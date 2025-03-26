@@ -15,7 +15,7 @@ const TABLE_HEAD = [
   "Action",
 ];
 
-function TABLE() {
+function TABLE({ searchName }) {
   const { Campanies } = useSelector((state) => state.campany);
   return (
     <main className=" h-full w-full overflow-scroll">
@@ -39,9 +39,11 @@ function TABLE() {
           </tr>
         </thead>
         <tbody>
-          {Campanies.map((ele) => (
-            <TableRow key={ele._id} ele={ele} />
-          ))}
+          {searchName.trim() === ""
+            ? Campanies.map((ele) => <TableRow key={ele._id} ele={ele} />)
+            : Campanies.filter((ele) =>
+                ele.Name.toLowerCase().includes(searchName.toLowerCase())
+              ).map((ele) => <TableRow key={ele._id} ele={ele} />)}
         </tbody>
       </table>
     </main>

@@ -1,6 +1,14 @@
 import React from "react";
 import { Typography } from "@material-tailwind/react";
+import { useDispatch } from "react-redux";
+import { deleteCampany } from "../Features/CampanySlice/CampanySlice";
+import EditButton from "../Components/EditButton";
 function TableRow({ ele }) {
+  const dispatch = useDispatch();
+  const onDeleteHandler = () => {
+    dispatch(deleteCampany({ campanyId: ele._id }));
+  };
+
   return (
     <tr className="even:bg-blue-gray-50/50">
       <td className="p-4">
@@ -68,8 +76,10 @@ function TableRow({ ele }) {
         </Typography>
       </td>
       <td className="p-4 flex gap-2">
-        <button className="bg-[#bbb] p-1 rounded-md">🖌️</button>
-        <button className="bg-[#bbb] p-1 rounded-md">❌</button>
+        <EditButton ele={ele} />
+        <button onClick={onDeleteHandler} className="bg-[#bbb] p-1 rounded-md">
+          ❌
+        </button>
       </td>
     </tr>
   );
