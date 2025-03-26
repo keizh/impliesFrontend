@@ -2,9 +2,11 @@ import { Typography, Input, Button } from "@material-tailwind/react";
 import { useState } from "react";
 import AddCompany from "../Components/AddCompany";
 import TABLE from "../Components/TABLE";
+import useDebounce from "../customHooks/useDebounce";
 
 function MainSection() {
   const [searchName, setSearchName] = useState("");
+  const d = useDebounce(searchName, () => {}, 500);
 
   return (
     <div className="w-full h-full bg-white rounded-md">
@@ -22,7 +24,7 @@ function MainSection() {
         </div>
       </header>
       <main>
-        <TABLE searchName={searchName} />
+        <TABLE searchName={d} />
       </main>
     </div>
   );
