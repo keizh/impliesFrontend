@@ -3,7 +3,8 @@ import { Typography } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { deleteCampany } from "../Features/CampanySlice/CampanySlice";
 import EditButton from "../Components/EditButton";
-function TableRow({ ele }) {
+function TableRow({ ele, selected }) {
+  const [selfSelected, setselfSelected] = React.useState(false);
   const dispatch = useDispatch();
   const onDeleteHandler = () => {
     dispatch(deleteCampany({ campanyId: ele._id }));
@@ -13,7 +14,11 @@ function TableRow({ ele }) {
     <tr className="even:bg-blue-gray-50/50">
       <td className="p-4">
         <Typography variant="small" color="blue-gray" className="font-normal">
-          <input type="checkbox" />
+          <input
+            onClick={() => setselfSelected((prev) => !prev)}
+            checked={selected || selfSelected}
+            type="checkbox"
+          />
         </Typography>
       </td>
       <td className="p-4">

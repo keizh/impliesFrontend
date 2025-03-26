@@ -1,21 +1,25 @@
 import { Typography } from "@material-tailwind/react";
-import React from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import TableRow from "../Components/TableRow";
 
-const TABLE_HEAD = [
-  "",
-  "Code",
-  "Name",
-  "Link",
-  "Machines",
-  "Frequency",
-  "Contact Number",
-  "Remark",
-  "Action",
-];
-
 function TABLE({ searchName }) {
+  const [selected, setSelected] = useState(false);
+  const TABLE_HEAD = [
+    <input
+      checked={selected}
+      onClick={() => setSelected((prev) => !prev)}
+      type="checkbox"
+    />,
+    "Code",
+    "Name",
+    "Link",
+    "Machines",
+    "Frequency",
+    "Contact Number",
+    "Remark",
+    "Action",
+  ];
   const { Campanies } = useSelector((state) => state.campany);
   return (
     <main className=" h-full w-full overflow-scroll">
@@ -40,10 +44,14 @@ function TABLE({ searchName }) {
         </thead>
         <tbody>
           {searchName.trim() === ""
-            ? Campanies.map((ele) => <TableRow key={ele._id} ele={ele} />)
+            ? Campanies.map((ele) => (
+                <TableRow selected={selected} key={ele._id} ele={ele} />
+              ))
             : Campanies.filter((ele) =>
                 ele.Name.toLowerCase().includes(searchName.toLowerCase())
-              ).map((ele) => <TableRow key={ele._id} ele={ele} />)}
+              ).map((ele) => (
+                <TableRow selected={selected} key={ele._id} ele={ele} />
+              ))}
         </tbody>
       </table>
     </main>
