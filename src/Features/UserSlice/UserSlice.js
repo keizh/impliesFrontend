@@ -67,6 +67,7 @@ const UserSlice = createSlice({
     status: "idle",
     error: null,
     taskCompleted: "",
+    userId: "",
   },
   reducers: {
     updateError: (state, action) => {
@@ -74,6 +75,12 @@ const UserSlice = createSlice({
     },
     updateTaskCompleted: (state, action) => {
       state.taskCompleted = action.payload;
+    },
+    updateNameEmail: (state, action) => {
+      console.log(`updateNameEmail`, action.payload);
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.userId = action.payload.userId;
     },
   },
   extraReducers: (builder) => {
@@ -106,5 +113,6 @@ const UserSlice = createSlice({
       });
   },
 });
-export const { updateError, updateTaskCompleted } = UserSlice.actions;
+export const { updateError, updateTaskCompleted, updateNameEmail } =
+  UserSlice.actions;
 export default UserSlice;

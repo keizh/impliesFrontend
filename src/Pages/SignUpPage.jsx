@@ -32,7 +32,9 @@ function SignUpPage() {
 
   useEffect(() => {
     if (taskCompleted === "new user created") {
-      navigate("/login");
+      navigate("/login", {
+        replace: true,
+      });
       dispatch(updateTaskCompleted(""));
     }
   }, [taskCompleted]);

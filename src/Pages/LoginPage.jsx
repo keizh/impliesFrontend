@@ -42,7 +42,9 @@ function LoginPage() {
 
   useEffect(() => {
     if (taskCompleted === "successfull login") {
-      navigate("/auth");
+      navigate("/auth", {
+        replace: true,
+      });
       dispatch(updateTaskCompleted(""));
     }
   }, [taskCompleted]);

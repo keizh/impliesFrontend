@@ -5,7 +5,7 @@ import CampanySlice from "../Features/CampanySlice/CampanySlice";
 const Store = configureStore({
   reducer: {
     user: UserSlice.reducer,
-    CampanySlice: CampanySlice.reducer,
+    campany: CampanySlice.reducer,
   },
 });
 
